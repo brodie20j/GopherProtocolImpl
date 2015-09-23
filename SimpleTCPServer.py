@@ -5,9 +5,9 @@ author:  Amy Csizmar Dalal and [YOUR NAMES HERE]
 CS 331, Fall 2015
 date:  21 September 2015
 '''
-import sys, socket
+import sys, os,socket
 
-class TCPServer:
+class GopherTCPServer:
     def __init__(self, port=50000):
         self.port = port
         self.host = ""
@@ -30,7 +30,14 @@ class TCPServer:
             self.parse_client_request(newdata)
 
     def links_func(self):
-        #...
+        fyle=open("server.links")
+        return fyle.read()
+
+    def get_requested_data(self, data):
+        #check links file for data
+        #if data does not exist in links file - elegantly handle error
+        #else: if data is a file, open it and send it over.  Else, send the contents of the directory.
+
 
     def listen(self):
         self.sock.listen(5)
@@ -54,7 +61,7 @@ def main():
     # Create a server
     if len(sys.argv) > 1:
         try:
-            server = TCPServer(int(sys.argv[1]))
+            server = GopherTCPServer(int(sys.argv[1]))
         except ValueError:
             print ("Please specify port as an integer.  Creating server on default port.")
             server = TCPServer()

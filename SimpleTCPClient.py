@@ -7,6 +7,20 @@ date:  21 September 2015
 '''
 import sys, socket
 
+class GopherTCPClient:
+
+    def __init__(self, host="",port=50000,requeststring):
+        self.port = port
+        self.host = host
+        self.clientsock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        self.clientsock.connect((self.host, self.port))
+        self.clientsock.send(requeststring.encode("UTF8"))
+        response=self.clientsock.recv(1024)
+        #make response pretty
+
+
+
+
 def usage():
     print ("Usage:  python SimpleTCPClient <server IP> <port number> <message>")
 

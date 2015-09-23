@@ -16,6 +16,22 @@ class TCPServer:
         self.sock.bind((self.host, self.port))
 
 
+    def parse_client_request(self, data):
+        terminatorstring="<CR><LF>"
+        endindex=data.find(terminatorstring)
+        if endindex == 0:
+            return self.links_func()
+        elif endindex == -1:
+            return ""
+        else:
+            request=data[0:endindex]
+            self.get_data(request)
+            newdata=data[endindex+len(terminatorstring):len(data)]
+            self.parse_client_request(newdata)
+
+    def links_func(self):
+        #...
+
     def listen(self):
         self.sock.listen(5)
 
@@ -23,13 +39,15 @@ class TCPServer:
             clientSock, clientAddr = self.sock.accept()
             print ("Connection received from ",  clientSock.getpeername())
             # Get the message and echo it back
-            while True:
-                data = clientSock.recv(1024)
-                if not len(data):
-                    break
-                print ("Received message:  " + data.decode("ascii"))
+            #while True:
+            data = clientSock.recv(1024)
+            if not len(data):
+                break
+            response=self.parse_client_request(data)
 
-                clientSock.sendall(data)
+            print ("Received message:  " + data.decode("ascii"))
+
+            clientSock.sendall(response)
             clientSock.close()
 
 def main():

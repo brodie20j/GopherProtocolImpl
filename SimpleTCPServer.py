@@ -30,7 +30,7 @@ class GopherTCPServer:
             self.parse_client_request(newdata)
 
     def links_func(self):
-        fyle=open("server.links")
+        fyle = open("server.links")
         return fyle.read()
 
     def get_requested_data(self, data):

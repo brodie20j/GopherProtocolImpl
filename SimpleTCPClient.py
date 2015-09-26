@@ -13,11 +13,24 @@ class GopherTCPClient:
         self.port = port
         self.host = host
         self.clientsock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        self.clientsock.connect((self.host, self.port))
+        try:
+            self.clientsock.connect((self.host, self.port))
+            print ("Connected to server; sending message")
+        except socket.error:
+            print("Could not connect to server")
+            sys.exit(1)
         self.clientsock.send(requeststring.encode("ascii"))
+        print ("Sent message; waiting for reply")
         response = self.clientsock.recv(1024)
         #make response pretty
 
+        #while 1:
+        #get input from user
+        #connect to server
+        #send input
+        #get reply
+        #display
+        #kill connection
 
 
 
@@ -31,15 +44,12 @@ def main():
             server = sys.argv[1]
             port = int(sys.argv[2])
             message = sys.argv[3]
+            GopherTCPClient(message,server,port)
         except ValueError:
             usage()
 
-        serverSock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        serverSock.connect((server, port))
-        print ("Connected to server; sending message")
 
         serverSock.send(message.encode("ascii"))
-        print ("Sent message; waiting for reply")
 
         returned = serverSock.recv(1024)
         print ("Received reply: "+ returned.decode("ascii"))

@@ -37,7 +37,7 @@ class GopherTCPServer:
         #check links file for data
         #if data does not exist in links file - elegantly handle error
         #else: if data is a file, open it and send it over.  Else, send the contents of the directory.
-
+        print(data)
 
     def listen(self):
         self.sock.listen(5)
@@ -50,11 +50,11 @@ class GopherTCPServer:
             data = clientSock.recv(1024)
             if not len(data):
                 break
-            response=self.parse_client_request(data)
+            response=self.parse_client_request(data.decode("ascii"))
 
             print ("Received message:  " + data.decode("ascii"))
 
-            clientSock.sendall(response)
+            clientSock.sendall(response.encode("ascii"))
             clientSock.close()
 
 def main():
@@ -64,9 +64,9 @@ def main():
             server = GopherTCPServer(int(sys.argv[1]))
         except ValueError:
             print ("Please specify port as an integer.  Creating server on default port.")
-            server = TCPServer()
+            server = GopherTCPServer()
     else:
-        server = TCPServer()
+        server = GopherTCPServer()
 
     # Listen forever
     print ("Listening on port " + str(server.port))

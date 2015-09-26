@@ -9,13 +9,13 @@ import sys, socket
 
 class GopherTCPClient:
 
-    def __init__(self, host="",port=50000,requeststring):
+    def __init__(self, requeststring, host="",port=50000):
         self.port = port
         self.host = host
         self.clientsock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
         self.clientsock.connect((self.host, self.port))
-        self.clientsock.send(requeststring.encode("UTF8"))
-        response=self.clientsock.recv(1024)
+        self.clientsock.send(requeststring.encode("ascii"))
+        response = self.clientsock.recv(1024)
         #make response pretty
 
 

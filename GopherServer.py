@@ -1,7 +1,7 @@
 '''
-A simple TCP "echo" server written in Python.
+A Gopher server written in Python.
 
-author:  Amy Csizmar Dalal and [YOUR NAMES HERE]
+author:  Amy Csizmar Dalal, Jonathan Brodie, Camille Benson, Tristan Leigh
 CS 331, Fall 2015
 date:  21 September 2015
 '''
@@ -22,22 +22,39 @@ class GopherTCPServer:
         if endindex == 0:
             return self.links_func()
         elif endindex == -1:
+            self.error()
             return ""
         else:
             request=data[0:endindex]
-            self.get_data(request)
-            newdata=data[endindex+len(terminatorstring):len(data)]
-            self.parse_client_request(newdata)
+            self.get_requested_data(request)
+            #commented out because we only needed to finish 
+            #newdata=data[endindex+len(terminatorstring):len(data)]
+            #self.parse_client_request(newdata)
 
     def links_func(self):
         fyle = open("server.links")
         return fyle.read()
 
     def get_requested_data(self, data):
-        #check links file for data
-        #if data does not exist in links file - elegantly handle error
-        #else: if data is a file, open it and send it over.  Else, send the contents of the directory.
-        print(data)
+        sampleString=self.links_func()
+        index=sampleString.find(data)
+
+        if index == -1:
+            #elegantly handle error
+            self.error(data)
+        else:
+            #the request exists!
+            file_type=data[0]
+            if file_type == "0":
+                #open the file and send it over
+                print("foo")
+            elif file_type == "1":
+                #walk the directory and return all files and subdirectories there
+                print("foo)")
+
+    def error(self, request):
+        #elegantly handles a file not found
+        print("ERROR: "+request+"\nCould not be found!")
 
     def listen(self):
         self.sock.listen(5)
@@ -50,12 +67,11 @@ class GopherTCPServer:
             data = clientSock.recv(1024)
             if not len(data):
                 break
-            response=self.parse_client_request(data.decode("ascii"))
-
             print ("Received message:  " + data.decode("ascii"))
-
+            response=self.parse_client_request(data.decode("ascii"))
             clientSock.sendall(response.encode("ascii"))
             clientSock.close()
+            print("Closed socket. Connection is over.")
 
 def main():
     # Create a server

@@ -1,7 +1,7 @@
 '''
-A simple "echo" client written in Python.
+A Gopher client written in Python.
 
-author:  Amy Csizmar Dalal and [YOUR NAMES HERE]
+author:  Amy Csizmar Dalal, Jonathan Brodie, Camille Benson, Tristan Leigh
 CS 331, Fall 2015
 date:  21 September 2015
 '''
@@ -10,18 +10,20 @@ import sys, socket
 class GopherTCPClient:
 
     def __init__(self, requeststring, host="",port=50000):
+
         self.port = port
         self.host = host
         self.write_buffer=requeststring
-        self.clientsock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        self.clientsock = None
         self.connect()
         self.connection_loop()
 
     def connect(self):
         try:
+            self.clientsock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             self.clientsock.connect((self.host, self.port))
             print ("Connected to server;")
-            self.clientsock.send(requeststring.encode("ascii"))
+            self.clientsock.send(self.write_buffer.encode("ascii"))
             print ("Sent message; waiting for reply")
             response=self.clientsock.recv(1024)
         except socket.error:
@@ -34,7 +36,7 @@ class GopherTCPClient:
 
     def connection_loop(self):
         while True:
-            request=input("Enter request: ")
+            request=input("Enter request (without quotation marks): ")
             self.write_buffer=request
             self.connect()
     def handle_response(self, response):
@@ -47,7 +49,6 @@ def usage():
 
 def main():
     # Process command line args (server, port, message)
-    if len(sys.argv) == 4:
         try:
             server = sys.argv[1]
             port = int(sys.argv[2])
@@ -55,16 +56,5 @@ def main():
             GopherTCPClient(message,server,port)
         except ValueError:
             usage()
-
-
-        serverSock.send(message.encode("ascii"))
-
-        returned = serverSock.recv(1024)
-        print ("Received reply: "+ returned.decode("ascii"))
-
-        serverSock.close()
-
-    else:
-        usage()
 
 main()

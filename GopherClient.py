@@ -12,25 +12,33 @@ class GopherTCPClient:
     def __init__(self, requeststring, host="",port=50000):
         self.port = port
         self.host = host
+        self.write_buffer=requeststring
         self.clientsock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+        self.connect()
+        self.connection_loop()
+
+    def connect(self):
         try:
             self.clientsock.connect((self.host, self.port))
-            print ("Connected to server; sending message")
+            print ("Connected to server;")
+            self.clientsock.send(requeststring.encode("ascii"))
+            print ("Sent message; waiting for reply")
+            response=self.clientsock.recv(1024)
         except socket.error:
             print("Could not connect to server")
             sys.exit(1)
-        self.clientsock.send(requeststring.encode("ascii"))
-        print ("Sent message; waiting for reply")
-        response = self.clientsock.recv(1024)
-        #make response pretty
+        if response is not None:
+            response=response.decode("ascii")
+            self.handle_response(response)
+            #connection terminated by server, enter new connection loop
 
-        #while 1:
-        #get input from user
-        #connect to server
-        #send input
-        #get reply
-        #display
-        #kill connection
+    def connection_loop(self):
+        while True:
+            request=input("Enter request: ")
+            self.write_buffer=request
+            self.connect()
+    def handle_response(self, response):
+        print(response)
 
 
 

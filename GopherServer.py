@@ -22,11 +22,11 @@ class GopherTCPServer:
         if endindex == 0:
             return self.links_func()
         elif endindex == -1:
-            self.error()
+            self.error(data)
             return ""
         else:
             request=data[0:endindex]
-            self.get_requested_data(request)
+            return self.get_requested_data(request)
             #commented out because we only needed to finish 
             #newdata=data[endindex+len(terminatorstring):len(data)]
             #self.parse_client_request(newdata)
@@ -36,21 +36,26 @@ class GopherTCPServer:
         return fyle.read()
 
     def get_requested_data(self, data):
-        sampleString=self.links_func()
-        index=sampleString.find(data)
+        print(data)
+        fyle = open("server.links")
+        found=False
+        requested_data = ""
+        for line in fyle.readlines():
+            index=line.find(data)
+            if index > -1:
+                file_type=line[0]
 
-        if index == -1:
-            #elegantly handle error
-            self.error(data)
-        else:
-            #the request exists!
-            file_type=data[0]
-            if file_type == "0":
-                #open the file and send it over
-                print("foo")
-            elif file_type == "1":
-                #walk the directory and return all files and subdirectories there
-                print("foo)")
+                #the request exists!
+                if not found:
+                    if file_type == "0":
+                        requested_data = open(data).read()
+                        return requested_data
+
+                found=True
+                requested_data+=line
+        if found is False:
+            return self.error(data)
+        return requested_data
 
     def error(self, request):
         #elegantly handles a file not found

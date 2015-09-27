@@ -1,5 +1,10 @@
 0About this site	README	127.0.0.1	   50000
 0Contact info	contacts	127.0.0.1	   50000
 1Haiku poems	Haikus/	   127.0.0.1	  50000
-1Limerick poems	   Limericks/	127.0.0.1	   50000
+1Limerick poems   Limericks/	127.0.0.1	   50000
 1Shakespearean sonnets	Sonnets/	127.0.0.1	   50000
+
+
+
+0RONDEAU 3	Sonnets/sonnet1.txt	127.0.0.1	50000
+0Another Sonnet	Sonnets/sonnet2.txt	127.0.0.1	50000

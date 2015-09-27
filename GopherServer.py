@@ -17,8 +17,8 @@ class GopherTCPServer:
 
 
     def parse_client_request(self, data):
-        terminatorstring="<CR><LF>"
-        endindex=data.find(terminatorstring)
+        terminatorstring = "<CR><LF>"
+        endindex = data.find(terminatorstring)
         if endindex == 0:
             return self.links_func()
         elif endindex == -1:
@@ -38,12 +38,12 @@ class GopherTCPServer:
     def get_requested_data(self, data):
         print(data)
         fyle = open("server.links")
-        found=False
+        found = False
         requested_data = ""
         for line in fyle.readlines():
-            index=line.find(data)
+            index = line.find(data)
             if index > -1:
-                file_type=line[0]
+                file_type = line[0]
 
                 #the request exists!
                 if not found:
@@ -51,8 +51,8 @@ class GopherTCPServer:
                         requested_data = open(data).read()
                         return requested_data
 
-                found=True
-                requested_data+=line
+                found = True
+                requested_data += line
         if found is False:
             return self.error(data)
         return requested_data
@@ -73,7 +73,7 @@ class GopherTCPServer:
             if not len(data):
                 break
             print ("Received message:  " + data.decode("ascii"))
-            response=self.parse_client_request(data.decode("ascii"))
+            response = self.parse_client_request(data.decode("ascii"))
             clientSock.sendall(response.encode("ascii"))
             clientSock.close()
             print("Closed socket. Connection is over.")

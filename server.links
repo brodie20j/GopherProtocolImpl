@@ -1,10 +1,66 @@
-0About this site	README	127.0.0.1	   50000
-0Contact info	contacts	127.0.0.1	   50000
-1Haiku poems	Haikus/	   127.0.0.1	  50000
-1Limerick poems   Limericks/	127.0.0.1	   50000
-1Shakespearean sonnets	Sonnets/	127.0.0.1	   50000
+
+
+0About this site	README	127.0.0.1	50000
+1Hip Hop	HipHop/	127.0.0.1	50000
+1Country	Country/	127.0.0.1	50000
+1Pop	Pop/	127.0.0.1	50000
+1Rock	Rock/	127.0.0.1	50000
+1Rhythm and Blues	RB/	127.0.0.1	50000
 
 
 
-0RONDEAU 3	Sonnets/sonnet1.txt	127.0.0.1	50000
-0Another Sonnet	Sonnets/sonnet2.txt	127.0.0.1	50000
+
+
+
+1Drake	HipHop/Drake	127.0.0.1	50000
+1Kendrick Lamar	HipHop/KendrickLamar	127.0.0.1	50000
+
+1Rascal Flatts	Country/RascalFlatts	127.0.0.1	50000
+
+1Katy Perry	Pop/KatyPerry	127.0.0.1	50000
+1Miley Cyrus	Pop/MileyCyrus	127.0.0.1	50000
+
+1A7X	Rock/A7X	127.0.0.1	50000
+1Green Day	Rock/GreenDay	127.0.0.1	50000
+1Aerosmith	Rock/Aerosmith	127.0.0.1	50000
+
+1R Kelly	RB/RKelly	127.0.0.1	50000
+1Trey Songz	RB/TreySongz	127.0.0.1	50000
+
+
+
+
+
+
+0Hotline Bling	HipHop/Drake/HotlineBling	127.0.0.1	50000
+0Back to Back	HipHop/Drake/BacktoBack	127.0.0.1	50000
+
+0Swimming Pools	HipHop/KendrickLamar/SwimmingPools	127.0.0.1	50000
+0Money Trees	HipHop/KendrickLamar/MoneyTrees	127.0.0.1	50000
+
+0Life is a Highway	Country/RascalFlatts/LifeisaHighway	127.0.0.1	50000
+
+0Dark Horse	Pop/KatyPerry/DarkHorse	127.0.0.1	50000
+0Firework	Pop/KatyPerry/Firework	127.0.0.1	50000
+
+0Party in the USA	Pop/MileyCyrus/PartyintheUSA	127.0.0.1	50000
+0Wrecking Ball	Pop/MileyCyrus/WreckingBall	127.0.0.1	50000
+
+0So Far Away	Rock/A7X/SoFarAway	127.0.0.1	50000
+0A Little Piece of Heaven	Rock/A7X/ALittlePieceofHeaven	127.0.0.1	50000
+
+0Boulevard of Broken Dreams	Rock/GreenDay/BoulevardofBrokenDreams	127.0.0.1	50000
+0American Idiot	Rock/GreenDay/AmericanIdiot	127.0.0.1	50000
+
+0Dream On	Rock/Aerosmith/DreamOn	127.0.0.1	50000
+
+0I Believe I Can Fly	RB/RKelly/IBelieveICanFly	127.0.0.1	50000
+0Ignition	RB/RKelly/Ignition	127.0.0.1	50000
+
+0Slow Motion	RB/TreySongz/SlowMotion	127.0.0.1	50000
+0Bottoms Up	RB/TreySongz/BottomsUp	127.0.0.1	50000
+
+
+
+
+

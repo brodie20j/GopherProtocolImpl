@@ -5,20 +5,20 @@
 1Rock	Rock/	127.0.0.1	50000
 1Rhythm and Blues	RB/	127.0.0.1	50000
 
-1Drake	HipHop/Drake	127.0.0.1	50000
-1Kendrick Lamar	HipHop/KendrickLamar	127.0.0.1	50000
+1Drake	HipHop/Drake/	127.0.0.1	50000
+1Kendrick Lamar	HipHop/KendrickLamar/	127.0.0.1	50000
 
-1Rascal Flatts	Country/RascalFlatts	127.0.0.1	50000
+1Rascal Flatts	Country/RascalFlatts/	127.0.0.1	50000
 
-1Katy Perry	Pop/KatyPerry	127.0.0.1	50000
-1Miley Cyrus	Pop/MileyCyrus	127.0.0.1	50000
+1Katy Perry	Pop/KatyPerry/	127.0.0.1	50000
+1Miley Cyrus	Pop/MileyCyrus/	127.0.0.1	50000
 
-1A7X	Rock/A7X	127.0.0.1	50000
-1Green Day	Rock/GreenDay	127.0.0.1	50000
-1Aerosmith	Rock/Aerosmith	127.0.0.1	50000
+1A7X	Rock/A7X/	127.0.0.1	50000
+1Green Day	Rock/GreenDay/	127.0.0.1	50000
+1Aerosmith	Rock/Aerosmith/	127.0.0.1	50000
 
-1R Kelly	RB/RKelly	127.0.0.1	50000
-1Trey Songz	RB/TreySongz	127.0.0.1	50000
+1R Kelly	RB/RKelly/	127.0.0.1	50000
+1Trey Songz	RB/TreySongz/	127.0.0.1	50000
 
 0Hotline Bling	HipHop/Drake/HotlineBling	127.0.0.1	50000
 0Back to Back	HipHop/Drake/BacktoBack	127.0.0.1	50000
@@ -28,7 +28,7 @@
 
 0Life is a Highway	Country/RascalFlatts/LifeisaHighway	127.0.0.1	50000
 
-0Dark Horse	Pop/KatyPerry/DarkHorse	127.0.0.1	50000
+0Dark Horse	Pop/KatyPerry/DarkHorse.txt	127.0.0.1	50000
 0Firework	Pop/KatyPerry/Firework	127.0.0.1	50000
 
 0Party in the USA	Pop/MileyCyrus/PartyintheUSA	127.0.0.1	50000

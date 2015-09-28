@@ -36,8 +36,8 @@ class GopherTCPClient:
 
     def connection_loop(self):
         while True:
-            request=input("Enter request (without quotation marks): ")
-            self.write_buffer=request
+            request = input("Enter request (without quotation marks): ")
+            self.write_buffer = request
             self.connect()
     def handle_response(self, response):
         print(response)

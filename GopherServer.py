@@ -19,11 +19,12 @@ class GopherTCPServer:
     def parse_client_request(self, data):
         terminatorstring = "<CR><LF>"
         endindex = data.find(terminatorstring)
+
         if endindex == 0:
             return self.links_func()
         elif endindex == -1:
             self.error(data)
-            return ""
+            return "Request Error: Please include <CR><LF> at the end of the command"
         else:
             request=data[0:endindex]
             return self.get_requested_data(request)
@@ -32,16 +33,22 @@ class GopherTCPServer:
             #self.parse_client_request(newdata)
 
     def links_func(self):
-        fyle = open("server.links")
-        return fyle.read()
+        f = open("server.links")
+        fyle = f.read()
+        new_line_index = fyle.find('\n\n')
+        fyle = fyle[0:new_line_index]
+        return fyle
 
     def get_requested_data(self, data):
-        print(data)
         fyle = open("server.links")
         found = False
         requested_data = ""
         for line in fyle.readlines():
-            index = line.find(data)
+            print("DATA:", data)
+            print("DATA[0]:", data.split(' ')[0])
+            #print("LINE: ", line)
+            index = line.find('\t'+data.split(' ')[0])
+
             if index > -1:
                 file_type = line[0]
 
@@ -55,7 +62,7 @@ class GopherTCPServer:
                 requested_data += line
         if found is False:
             return self.error(data)
-        return requested_data
+        return requested_data + '.'
 
     def error(self, request):
         #elegantly handles a file not found

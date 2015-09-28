@@ -58,21 +58,26 @@ class GopherTCPServer:
         fyle = open("server.links")
         found = False
         requested_data = ""
+
         for line in fyle.readlines():
+            # Find if data has exact match
+            sample = line.split('\t')
+            if len(sample) > 1:
+                if data == sample[1] and not found:
+                    #exact match!
+                    if line[0] == '0':
+                        requested_data = open(data).read()
+                        return requested_data
+                    elif line[0] == '1':
+                        requested_data+=line+"<CR><LF>"
+                    found = True
+                    continue
+
 
             index = line.find(data)
 
-            if index > -1:
-                file_type = line[0]
-                request_string = line.split('\t')[1]
-                print("RQ:",request_string)
+            if index > -1 and found:
                 #the request exists!
-                if not found:
-                    if file_type == "0":
-                        requested_data = open(data).read()
-                        return requested_data
-
-                found = True
                 requested_data += line + "<CR><LF>"
         if found is False:
             return self.error(data)
@@ -82,7 +87,8 @@ class GopherTCPServer:
         '''
         elegantly handles a file or directory not found
         '''
-        print("ERROR: "+request+"\nCould not be found!")
+        return "ERROR: "+request+"\nCould not be found!\n"
+
 
     def listen(self):
         '''
@@ -100,7 +106,7 @@ class GopherTCPServer:
                 break
             print ("Received message:  " + data.decode("ascii"))
             response = self.parse_client_request(data.decode("ascii"))
-            print(response)
+
             clientSock.sendall(response.encode("ascii"))
             clientSock.close()
             print("Closed socket. Connection is over.")

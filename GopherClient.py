@@ -49,8 +49,18 @@ class GopherTCPClient:
         '''
         while True:
             request = input("Enter request as follows:\n>>FilePath<CR><LF>\n>>")
+            if not self.request_check(request):
+                print("<CR><LF> missing; appending to request.")
+                request = request + "<CR><LF>"
+
             self.write_buffer = request
             self.connect()
+
+    def request_check(self, request):
+        '''
+        Ensures the client's request is valid with <CR><LF> at the end.
+        '''
+        return request.find("<CR><LF>") > -1
 
 
     def handle_response(self, response):

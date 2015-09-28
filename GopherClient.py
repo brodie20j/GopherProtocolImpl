@@ -19,33 +19,62 @@ class GopherTCPClient:
         self.connection_loop()
 
     def connect(self):
+        '''
+        Connection function that attempts to connect to the server and send
+        the write buffer over the wire
+        '''
         try:
             self.clientsock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
             self.clientsock.connect((self.host, self.port))
             print ("Connected to server;")
             self.clientsock.send(self.write_buffer.encode("ascii"))
             print ("Sent message; waiting for reply")
-            response=self.clientsock.recv(1024)
+            response=self.clientsock.recv(32768)
+            print("Received response from the server:\n")
         except socket.error:
             print("Could not connect to server")
             sys.exit(1)
         if response is not None:
             response=response.decode("ascii")
             self.handle_response(response)
+        else:
+            print("The connection was terminated!  Closing client.")
+            sys.exit(1)
             #connection terminated by server, enter new connection loop
 
     def connection_loop(self):
+        '''
+        Client connection loop.  Gets input to put on the write buffer and
+        then connects to the server
+        '''
         while True:
-            request = input("Enter request (without quotation marks): ")
+            request = input("Enter request as follows:\n>>FilePath<CR><LF>\n>>")
             self.write_buffer = request
             self.connect()
-    def handle_response(self, response):
-        print(response)
 
+
+    def handle_response(self, response):
+        '''
+        Handles the server's response and properly formats it.
+        '''
+        response=response.split("<CR><LF>")
+        for line in response:
+            # Specify file type
+            if len(line) > 0 and line != ".":
+                file_type = line[0]
+                if file_type == '1':
+                    line = "Directory: "+line[1:]
+                else:
+                    line = "File: "+line[1:]
+                #line = line.split('\t')[0:3]
+                line = line.split('\t')
+
+                print(line[0]+"\t"+line[1])
 
 
 def usage():
     print ("Usage:  python SimpleTCPClient <server IP> <port number> <message>")
+
 
 def main():
     # Process command line args (server, port, message)

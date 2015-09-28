@@ -17,8 +17,15 @@ class GopherTCPServer:
 
 
     def parse_client_request(self, data):
+        '''
+        Parses the request the client sends over.  Returns the links file
+        if the user sends a blank line.  Looks for specific otherwise
+        '''
         terminatorstring = "<CR><LF>"
         endindex = data.find(terminatorstring)
+        if (endindex >= 255):
+            #selectionstring is too long!
+            return "Request Error: Please limit selection string to less than 255 characters"
 
         if endindex == 0:
             return self.links_func()
@@ -28,30 +35,37 @@ class GopherTCPServer:
         else:
             request=data[0:endindex]
             return self.get_requested_data(request)
-            #commented out because we only needed to finish 
-            #newdata=data[endindex+len(terminatorstring):len(data)]
-            #self.parse_client_request(newdata)
+
 
     def links_func(self):
+        '''
+        opens the links file and parses the new lines and replaces them with
+        the terminator string
+        '''
         f = open("server.links")
-        fyle = f.read()
-        new_line_index = fyle.find('\n\n')
-        fyle = fyle[0:new_line_index]
-        return fyle
+        return_string=""
+        fyle=f.read()
+        fyle=fyle.replace("\n\n","\n")
+        fyle=fyle.replace("\n","<CR><LF>")
+
+        return fyle+"."
+
 
     def get_requested_data(self, data):
+        '''
+        finds the requested data and returns it
+        '''
         fyle = open("server.links")
         found = False
         requested_data = ""
         for line in fyle.readlines():
-            print("DATA:", data)
-            print("DATA[0]:", data.split(' ')[0])
-            #print("LINE: ", line)
-            index = line.find('\t'+data.split(' ')[0])
+
+            index = line.find(data)
 
             if index > -1:
                 file_type = line[0]
-
+                request_string = line.split('\t')[1]
+                print("RQ:",request_string)
                 #the request exists!
                 if not found:
                     if file_type == "0":
@@ -59,16 +73,21 @@ class GopherTCPServer:
                         return requested_data
 
                 found = True
-                requested_data += line
+                requested_data += line + "<CR><LF>"
         if found is False:
             return self.error(data)
         return requested_data + '.'
 
     def error(self, request):
-        #elegantly handles a file not found
+        '''
+        elegantly handles a file or directory not found
+        '''
         print("ERROR: "+request+"\nCould not be found!")
 
     def listen(self):
+        '''
+        Server listening loop
+        '''
         self.sock.listen(5)
 
         while True:
@@ -81,6 +100,7 @@ class GopherTCPServer:
                 break
             print ("Received message:  " + data.decode("ascii"))
             response = self.parse_client_request(data.decode("ascii"))
+            print(response)
             clientSock.sendall(response.encode("ascii"))
             clientSock.close()
             print("Closed socket. Connection is over.")

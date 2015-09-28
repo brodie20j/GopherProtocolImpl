@@ -20,35 +20,30 @@
 1R Kelly	RB/RKelly/	127.0.0.1	50000
 1Trey Songz	RB/TreySongz/	127.0.0.1	50000
 
-0Hotline Bling	HipHop/Drake/HotlineBling	127.0.0.1	50000
-0Back to Back	HipHop/Drake/BacktoBack	127.0.0.1	50000
+0Hotline Bling	HipHop/Drake/HotlineBling.txt	127.0.0.1	50000
+0Back to Back	HipHop/Drake/BacktoBack.txt	127.0.0.1	50000
 
-0Swimming Pools	HipHop/KendrickLamar/SwimmingPools	127.0.0.1	50000
-0Money Trees	HipHop/KendrickLamar/MoneyTrees	127.0.0.1	50000
+0Swimming Pools	HipHop/KendrickLamar/SwimmingPools.txt	127.0.0.1	50000
+0Money Trees	HipHop/KendrickLamar/MoneyTrees.txt	127.0.0.1	50000
 
-0Life is a Highway	Country/RascalFlatts/LifeisaHighway	127.0.0.1	50000
+0Life is a Highway	Country/RascalFlatts/LifeisaHighway.txt	127.0.0.1	50000
 
 0Dark Horse	Pop/KatyPerry/DarkHorse.txt	127.0.0.1	50000
-0Firework	Pop/KatyPerry/Firework	127.0.0.1	50000
+0Firework	Pop/KatyPerry/Firework.txt	127.0.0.1	50000
 
-0Party in the USA	Pop/MileyCyrus/PartyintheUSA	127.0.0.1	50000
-0Wrecking Ball	Pop/MileyCyrus/WreckingBall	127.0.0.1	50000
+0Party in the USA	Pop/MileyCyrus/PartyintheUSA.txt	127.0.0.1	50000
+0Wrecking Ball	Pop/MileyCyrus/WreckingBall.txt	127.0.0.1	50000
 
-0So Far Away	Rock/A7X/SoFarAway	127.0.0.1	50000
-0A Little Piece of Heaven	Rock/A7X/ALittlePieceofHeaven	127.0.0.1	50000
+0So Far Away	Rock/A7X/SoFarAway.txt	127.0.0.1	50000
+0A Little Piece of Heaven	Rock/A7X/ALittlePieceofHeaven.txt	127.0.0.1	50000
 
-0Boulevard of Broken Dreams	Rock/GreenDay/BoulevardofBrokenDreams	127.0.0.1	50000
-0American Idiot	Rock/GreenDay/AmericanIdiot	127.0.0.1	50000
+0Boulevard of Broken Dreams	Rock/GreenDay/BoulevardofBrokenDreams.txt	127.0.0.1	50000
+0American Idiot	Rock/GreenDay/AmericanIdiot.txt	127.0.0.1	50000
 
-0Dream On	Rock/Aerosmith/DreamOn	127.0.0.1	50000
+0Dream On	Rock/Aerosmith/DreamOn.txt	127.0.0.1	50000
 
-0I Believe I Can Fly	RB/RKelly/IBelieveICanFly	127.0.0.1	50000
-0Ignition	RB/RKelly/Ignition	127.0.0.1	50000
+0I Believe I Can Fly	RB/RKelly/IBelieveICanFly.txt	127.0.0.1	50000
+0Ignition	RB/RKelly/Ignition.txt	127.0.0.1	50000
 
-0Slow Motion	RB/TreySongz/SlowMotion	127.0.0.1	50000
-0Bottoms Up	RB/TreySongz/BottomsUp	127.0.0.1	50000
-
-
-
-
-
+0Slow Motion	RB/TreySongz/SlowMotion.txt	127.0.0.1	50000
+0Bottoms Up	RB/TreySongz/BottomsUp.txt	127.0.0.1	50000

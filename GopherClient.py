@@ -64,12 +64,14 @@ class GopherTCPClient:
                 file_type = line[0]
                 if file_type == '1':
                     line = "Directory: "+line[1:]
-                else:
+                    line = line.split('\t')
+                    print(line[0]+"\t"+line[1])
+                elif file_type == '0':
                     line = "File: "+line[1:]
-                #line = line.split('\t')[0:3]
-                line = line.split('\t')
-
-                print(line[0]+"\t"+line[1])
+                    line = line.split('\t')
+                    print(line[0]+"\t"+line[1])
+                else:
+                    print(line)
 
 
 def usage():

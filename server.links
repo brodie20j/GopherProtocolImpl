@@ -1,4 +1,4 @@
-0About this site	README	127.0.0.1	50000
+0About this site	README.md	127.0.0.1	50000
 1Hip Hop	HipHop/	127.0.0.1	50000
 1Country	Country/	127.0.0.1	50000
 1Pop	Pop/	127.0.0.1	50000
@@ -28,7 +28,7 @@
 
 0Life is a Highway	Country/RascalFlatts/LifeisaHighway.txt	127.0.0.1	50000
 
-0Dark Horse	Pop/KatyPerry/DarkHorse.txt	127.0.0.1	50000
+0I Kissed a Girl	Pop/KatyPerry/IKissedaGirl.txt	127.0.0.1	50000
 0Firework	Pop/KatyPerry/Firework.txt	127.0.0.1	50000
 
 0Party in the USA	Pop/MileyCyrus/PartyintheUSA.txt	127.0.0.1	50000

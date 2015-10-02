@@ -9,12 +9,14 @@ import sys, socket
 
 class GopherTCPClient:
 
-    def __init__(self, requeststring, host="",port=50000):
+    def __init__(self, host="",port=50000):
 
         self.port = port
         self.host = host
-        self.write_buffer=requeststring
+        self.write_buffer="\r\n"
+        self.request_check(self.write_buffer)
         self.clientsock = None
+        self.response_map = {}
         self.connect()
         self.connection_loop()
 
@@ -48,44 +50,60 @@ class GopherTCPClient:
         then connects to the server
         '''
         while True:
-            request = input("Enter request as follows:\n>>FilePath<CR><LF>\n>>")
-            if not self.request_check(request):
-                print("<CR><LF> missing; appending to request.")
-                request = request + "<CR><LF>"
-
+            request = None
+            while request is None:
+                newrequest = input(">>Enter request as follows:\n>>Name of file/directory as displayed above (empty line for server contents)\n>>")
+                if newrequest == "":
+                    request=""
+                else:
+                    if newrequest in self.response_map:
+                        request = self.response_map[newrequest]
+                if request is None:
+                    print("Error: could not locate "+newrequest)
+            request = request + "\r\n"
             self.write_buffer = request
             self.connect()
 
     def request_check(self, request):
         '''
-        Ensures the client's request is valid with <CR><LF> at the end.
+        Ensures the client's request is valid with \\r\\n at the end.
         '''
-        return request.find("<CR><LF>") > -1
+        return request.find("\r\n") > -1
 
 
     def handle_response(self, response):
         '''
         Handles the server's response and properly formats it.
         '''
-        response=response.split("<CR><LF>")
+
+        if not self.request_check(response):
+            print("ERROR: Could not parse server's response!")
+            return
+
+        response=response.split("\r\n")
+
+
         for line in response:
             # Specify file type
             if len(line) > 0 and line != ".":
                 file_type = line[0]
                 if file_type == '1':
-                    line = "Directory: "+line[1:]
+                    line = line[1:]
                     line = line.split('\t')
-                    print(line[0]+"\t"+line[1])
+                    #print(line[0]+"\t"+line[1])
+                    self.response_map[line[0]]=line[1]
+                    print("Directory: "+line[0])
                 elif file_type == '0':
-                    line = "File: "+line[1:]
+                    line = line[1:]
                     line = line.split('\t')
-                    print(line[0]+"\t"+line[1])
+                    self.response_map[line[0]]=line[1]
+                    #print(line[0]+"\t"+line[1])
+                    print("File: "+line[0])
                 else:
                     print(line)
 
-
 def usage():
-    print ("Usage:  python SimpleTCPClient <server IP> <port number> <message>")
+    print ("Usage:  python GopherClient <server IP> <port number>")
 
 
 def main():
@@ -93,8 +111,8 @@ def main():
         try:
             server = sys.argv[1]
             port = int(sys.argv[2])
-            message = sys.argv[3]
-            GopherTCPClient(message,server,port)
+            #message = sys.argv[3]
+            GopherTCPClient(server,port)
         except ValueError:
             usage()
 

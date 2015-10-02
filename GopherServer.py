@@ -15,13 +15,14 @@ class GopherTCPServer:
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.bind((self.host, self.port))
 
-
     def parse_client_request(self, data):
         '''
         Parses the request the client sends over.  Returns the links file
         if the user sends a blank line.  Looks for specific otherwise
         '''
-        terminatorstring = "<CR><LF>"
+        print(data)
+        print(len(data))
+        terminatorstring = "\r\n"
         endindex = data.find(terminatorstring)
         if (endindex >= 255):
             #selectionstring is too long!
@@ -31,7 +32,10 @@ class GopherTCPServer:
             return self.links_func()
         elif endindex == -1:
             self.error(data)
-            return "Request Error: Please include <CR><LF> at the end of the command"
+            print("DATA:", data)
+            error_message="Request Error: Please include \\r\\n at the end of the command"
+            print(error_message)
+            return error_message
         else:
             request=data[0:endindex]
             return self.get_requested_data(request)
@@ -46,7 +50,7 @@ class GopherTCPServer:
         return_string=""
         fyle=f.read()
         fyle=fyle.replace("\n\n","\n")
-        fyle=fyle.replace("\n","<CR><LF>")
+        fyle=fyle.replace("\n","\r\n")
 
         return fyle+"."
 
@@ -67,9 +71,10 @@ class GopherTCPServer:
                     #exact match!
                     if line[0] == '0':
                         requested_data = open(data).read()
-                        return requested_data
+                        print(requested_data)
+                        return requested_data+"\r\n"
                     elif line[0] == '1':
-                        requested_data+=line+"<CR><LF>"
+                        requested_data+=line+"\r\n"
                     found = True
                     continue
 
@@ -78,9 +83,10 @@ class GopherTCPServer:
 
             if index > -1 and found:
                 #the request exists!
-                requested_data += line + "<CR><LF>"
+                requested_data += line + "\r\n"
         if found is False:
             return self.error(data)
+        print(requested_data)
         return requested_data + '.'
 
     def error(self, request):
